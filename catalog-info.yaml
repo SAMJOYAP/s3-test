@@ -1,0 +1,41 @@
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: s3-test-s3
+  description: S3 bucket s3-test in ap-northeast-2
+  annotations:
+    github.com/project-slug: SAMJOYAP/s3-test
+  labels:
+    type: s3
+    region: ap-northeast-2
+    managed-by: terraform
+spec:
+  type: storage
+  owner: platform-team
+  lifecycle: production
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: s3-test
+  description: Terraform configuration for S3 bucket
+  annotations:
+    github.com/project-slug: SAMJOYAP/s3-test
+    backstage.io/techdocs-ref: dir:.
+  labels:
+    infrastructure: terraform
+    cloud: aws
+    resource-type: s3
+  links:
+    - url: https://github.com/SAMJOYAP/s3-test.git
+      title: Repository
+      icon: github
+    - url: https://github.com/SAMJOYAP/s3-test.git/actions
+      title: GitHub Actions
+      icon: github
+spec:
+  type: infrastructure
+  lifecycle: production
+  owner: platform-team
+  dependsOn:
+    - resource:default/s3-test-s3
